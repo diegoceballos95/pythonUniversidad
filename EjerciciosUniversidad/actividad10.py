@@ -49,7 +49,7 @@ def cargarLista(lista, N):
         dicBobina["stock"] = int(input("- Ingrese stock: "))
 
         # Se agragan datos a la lista:
-        lista[i] = dicBobina
+        lista.append(dicBobina)
 
 
 def mostrarLista(lista, N):
@@ -144,15 +144,8 @@ def eliminar(lista, N, id, existeID):
 
                 pos = i
 
-        # Se realiza un CORRIMIENTO ya que no puedo usar ' lista = np.delete(lista, i) ' para que la lista se modifique debido al hecho de que esto retorna una nueva lista y no se modifica la lista que paso por referencia. Ademas, en la clase de Numpy se menciono que a partir de alli, todas las actividades debian hacerse con los arrays de numpy, y es por eso que no uso listas simples:
-
-        while(pos < N-1):
-
-            lista[pos]["id"] = lista[pos+1]["id"]
-            lista[pos]["metros"] = lista[pos+1]["metros"]
-            lista[pos]["ancho"] = lista[pos+1]["ancho"]
-            lista[pos]["stock"] = lista[pos+1]["stock"]
-            pos += 1
+        # Se elimina el elemento de la lista:
+        del lista[pos]
 
         # Salida:
         print("\nBobina eliminada exitosamente")
@@ -176,7 +169,7 @@ cantBobinas = int(input("Ingrese cantidad de bobinas [MAX 100]:"))
 cantBobinas = verificar(cantBobinas, 1, 100)
 
 # Crear ls lista:
-lista = np.empty(cantBobinas, dtype = dict)
+lista = []
 
 # Se cargan los datos en la lista:
 cargarLista(lista, cantBobinas)
